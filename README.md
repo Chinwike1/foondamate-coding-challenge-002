@@ -43,10 +43,11 @@ Start the program with:
 npm run start
 ```
 
-## Testing and Edge cases
+## Testing
 _________________________
-
+To run the test suite, run the following command in your terminal
 
 ```bash
-npm run test
+NODE_OPTIONS=--experimental-vm-modules npx jest
 ```
+This methods lets Jest support ESM imports
