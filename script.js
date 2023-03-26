@@ -11,11 +11,20 @@ const questions = [
 ]
 
 export function solveEquationA(a, b1, b2) {
-  return (b2 + b1) / a
+  if (a === 0) {
+    return NaN
+  } else {
+    return (b2 + b1) / a
+  }
 }
 
 export function solveEquationB(b1, a1, b2, b3, b4, a2) {
-  return (b4 - (b2 * b1 + b3)) / (b1 * a1 + a2)
+  // check if final coefficient of x is 0
+  if (b1 * a1 + a2 === 0) {
+    return NaN
+  } else {
+    return (b4 - (b2 * b1 + b3)) / (b1 * a1 + a2)
+  }
 }
 
 // Program intro
@@ -50,18 +59,9 @@ inquirer.prompt(questions).then((answers) => {
         `/ ${answers.a}\n`,
         `x = ${answers.b2 + answers.b1} / ${answers.a}`
       )
-
-      let solution
-
-      // check if the similar factor equals 0
-      if (answers.a === 0) {
-        solution = NaN
-      } else {
-        solution = solveEquationA(answers.a, answers.b1, answers.b2)
-      }
       console.log(
         'Solution: \n',
-        `x = ${answers.b2 + answers.b1}/${answers.a} = ${solution}`
+        `x = ${solveEquationA(answers.a, answers.b1, answers.b2)}`
       )
     })
     return
@@ -120,23 +120,17 @@ inquirer.prompt(questions).then((answers) => {
           answers.b1 * answers.a1 + answers.a2
         }`
       )
-
-      let solution
-
-      // check if the similar factor equals 0
-      if (answers.b1 * answers.a1 + answers.a2 === 0) {
-        solution = NaN
-      } else {
-        solution = solveEquationB(
+      console.log(
+        'Solution:\n',
+        `x = ${solveEquationB(
           answers.b1,
           answers.a1,
           answers.b2,
           answers.b3,
           answers.b4,
           answers.a2
-        )
-      }
-      console.log('Solution:\n', `x = ${solution}`)
+        )}`
+      )
     })
     return
   }
